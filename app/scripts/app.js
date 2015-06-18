@@ -32,14 +32,14 @@
 	// Consider adding the <caption> tag to the <table>. 
         plTable: _.template('<table class="table table-striped table-bordered">' +
                         	'<thead><tr>'+
-				'<th>Chromosome</th>'+
-				'<th>Locus ID</th>'+
-				'<th>Title</th>'+
+				'<th>chr</th>'+
+				'<th>start</th>'+
+				'<th>end</th>'+
 				'<th>Phase Length</th>'+
-				'<th>Start</th>'+
-				'<th>End</th>'+
-				'<th>Minimum P-Value</th>'+
-				'<th>Maximum Phasing Score</th>'+
+				'<th>score_name</th>'+
+				'<th>min pvalue</th>'+
+				'<th>locus id</th>'+
+				'<th>title</th>'+
 				'</tr></thead><tbody>'+
 				'<% _.each(result[0], function(r) { %>'+
 				'<tr>'+
@@ -106,7 +106,7 @@
       htmlString = '<h2><em>Arabidopsis thaliana</em> small RNA - Phased Loci' +
 	  '<div class="interactive"></div>' +
 	  '<div class="main_results"></div>' +
-	  '<hr><div class="provenance-info"></div><br>';
+	  '<hr><div class="provenance-info"></div><br></h2>';
       appContext.html(htmlString);
       
       /**
