@@ -32,11 +32,11 @@
 	// Consider adding the <caption> tag to the <table>. 
         plTable: _.template('<table class="table table-striped table-bordered">' +
                         	'<thead><tr>'+
-				'<th>chr</th>'+
+				'<th>chromosome</th>'+
 				'<th>start</th>'+
 				'<th>end</th>'+
-				'<th>Phase Length</th>'+
-				'<th>score_name</th>'+
+				'<th>phase length</th>'+
+				'<th>score</th>'+
 				'<th>min pvalue</th>'+
 				'<th>locus id</th>'+
 				'<th>title</th>'+
@@ -103,10 +103,10 @@
        * Each div could have a unique id. 
        * Each div could have one or more classes for sytling. 
        **/
-      htmlString = '<h2><em>Arabidopsis thaliana</em> small RNA - Phased Loci' +
+      htmlString = '<h2><em>Arabidopsis thaliana</em> small RNA - Phased Loci </h2>' +
 	  '<div class="interactive"></div>' +
 	  '<div class="main_results"></div>' +
-	  '<hr><div class="provenance-info"></div><br></h2>';
+	  '<hr><div class="provenance-info"></div><br>';
       appContext.html(htmlString);
       
       /**
