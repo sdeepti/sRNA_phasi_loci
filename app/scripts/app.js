@@ -47,7 +47,7 @@
 				'<td><%= r["start"] %></td>' +
 				'<td><%= r["end"] %></td>' +
 				'<td><%= r["phase_length"] %></td>' +
-				'<td><%= r["max_phasing_score"] %></td>' +
+				'<td><%= r["score"] %></td>' +
 				'<td><%= r["min_pvalue"] %></td>' +
 				'<td><%= r["locus_id"] %></td>' +
 				'<td><%= r["title"] %></td>' +
