@@ -1,4 +1,4 @@
-// This is a compiler directive that defines the underscore passed to the outer function. 
+// This is a compiler directive that defines the underscore passed to the outer function.
 /* global _ */
 
 /**
@@ -14,9 +14,9 @@
     'use strict';
     console.log('This is the Araport science app for Arabidopsis thaliana small RNA - Phasing Analysis.');
 
-    /** 
-     * data-app-name is an attribute of a div in app.html 
-     * app.html is included by a div in index.html 
+    /**
+     * data-app-name is an attribute of a div in app.html
+     * app.html is included by a div in index.html
      **/
     var appContext;
     appContext = $('[data-app-name="sRNA_phasing_app"]');
@@ -29,7 +29,7 @@
      **/
     var templates = {
 	// This feature invokes a dependency. Make sure to run 'bower install --save underscore'
-	// Consider adding the <caption> tag to the <table>. 
+	// Consider adding the <caption> tag to the <table>.
         plTable: _.template('<table class="table table-striped table-bordered">' +
                         	'<thead><tr>'+
 				'<th>chromosome</th>'+
@@ -40,6 +40,7 @@
 				'<th>min pvalue</th>'+
 				'<th>locus id</th>'+
 				'<th>title</th>'+
+                '<th></th>'+
 				'</tr></thead><tbody>'+
 				'<% _.each(result[0], function(r) { %>'+
 				'<tr>'+
@@ -51,6 +52,7 @@
 				'<td><%= r["min_pvalue"] %></td>' +
 				'<td><%= r["locus_id"] %></td>' +
 				'<td><%= r["title"] %></td>' +
+                '<td><a href="<%= r["link"] %>" target="_blank"><img src="<%= r["image"] %>"></a></td>'+
 				'</tr>'+
 				'<% }) %>'+
 				'</tbody>'+
@@ -69,14 +71,14 @@
 	    console.log('Search result status is NOT good!');
 	    return (false);
 	}
-	
+
 	// These commands, in code or typed into the console, are useful for exploring the data.
 	// console.log('JSON Object = ' + JSON.stringify(json));
 	// console.log(json.obj.result[0].sequence);
 	// console.log(templates.plTable(json.obj));
-	
+
 	// This would be be optional redundant with next step that does a REPLACE.
-	// $('.main_results').empty();           
+	// $('.main_results').empty();
 
 	// The next command displays the table with a loop and a template.
 	$('.main_results', appContext).html(templates.plTable(json.obj));
@@ -86,60 +88,60 @@
 	$('.main_results table', appContext).dataTable( {'lengthMenu': [5, 10, 25, 50, 100]} );
 	return (true);
     };
-    
+
     /**
-     * Create an anonymous function and register it to fire when AgaveAPI is ready. 
-     * Our science app functionality belongs inside this function. 
+     * Create an anonymous function and register it to fire when AgaveAPI is ready.
+     * Our science app functionality belongs inside this function.
      **/
   window.addEventListener('Agave::ready', function() {
       var Agave, info;
       var htmlString;
 
       /**
-       * Use the jQuery .html() setter/getter function to REPLACE content. 
-       * Alter the HTML title to show we are running. 
-       * Add a div to hold the interactive application content. 
-       * Add a div to hold the provenance information. 
-       * Each div could have a unique id. 
-       * Each div could have one or more classes for sytling. 
+       * Use the jQuery .html() setter/getter function to REPLACE content.
+       * Alter the HTML title to show we are running.
+       * Add a div to hold the interactive application content.
+       * Add a div to hold the provenance information.
+       * Each div could have a unique id.
+       * Each div could have one or more classes for sytling.
        **/
       htmlString = '<h2><em>Arabidopsis thaliana</em> small RNA - Phased Loci </h2>' +
 	  '<div class="interactive"></div>' +
 	  '<div class="main_results"></div>' +
 	  '<hr><div class="provenance-info"></div><br>';
       appContext.html(htmlString);
-      
+
       /**
-       * Search the appContenxt div for elements with attribute provenance-info. 
-       * Adjust the provenance info at the bottom of the screen 
+       * Search the appContenxt div for elements with attribute provenance-info.
+       * Adjust the provenance info at the bottom of the screen
        **/
       info = $('.provenance-info', appContext);
 
-      // The bootstrap.css (in use at Araport) recognizes class "text-center" and centers it. 
+      // The bootstrap.css (in use at Araport) recognizes class "text-center" and centers it.
       info.addClass('text-center');
 
       /**
-       * For now, hard code some provenance info. 
-       * Later, get provenance from a Meyers Lab web service. 
+       * For now, hard code some provenance info.
+       * Later, get provenance from a Meyers Lab web service.
        **/
       info.append('<p>Visit <a href="http://www.meyerslab.org/data/">Meyers Lab Data</a> for more information!</p>');
 
-      /** 
-       * This is redundant because this function was called on Agave ready! 
-       * However this is demonstrative of an Agave call. 
-       * The getStatus() call takes three parameters: args, callback, error. 
-       * We pass an empty opbject, an anonymous function, and omit error. 
+      /**
+       * This is redundant because this function was called on Agave ready!
+       * However this is demonstrative of an Agave call.
+       * The getStatus() call takes three parameters: args, callback, error.
+       * We pass an empty opbject, an anonymous function, and omit error.
        *
        * Agave = window.Agave;
        * Agave.api.adama.getStatus({}, function(resp) {
        *  if (resp.obj.status === 'success') {
        *      console.log('Agave status is good!');
-       *  } else {  
+       *  } else {
        *      console.log('Agave status is NOT good!');
        *      return (false);
        *  }
-       * }); // end of getStatus 
-       **/ 
+       * }); // end of getStatus
+       **/
 
       /**
        * Execute a search.
@@ -149,13 +151,13 @@
        **/
       Agave = window.Agave;
       Agave.api.adama.search(
-          { 'namespace': 'meyerslab', 
-	    'service': 'srna_phased_loci_v0.1', 
+          { 'namespace': 'meyerslab',
+	    'service': 'srna_phased_loci_v0.1',
             'queryParams': {}
 	  },
 	  showSearchResult,
 	  showSearchError
       );
-  });        
+  });
 
 })(window, jQuery, _);
