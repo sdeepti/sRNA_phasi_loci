@@ -40,6 +40,7 @@
 				'<th>min pvalue</th>'+
 				'<th>locus id</th>'+
 				'<th>title</th>'+
+                                '<th>image</th>'+ 
 				'</tr></thead><tbody>'+
 				'<% _.each(result[0], function(r) { %>'+
 				'<tr>'+
@@ -51,6 +52,7 @@
 				'<td><%= r["min_pvalue"] %></td>' +
 				'<td><%= r["locus_id"] %></td>' +
 				'<td><%= r["title"] %></td>' +
+                                '<td><a href="<%= r["link"] %>" target="_blank"><img src="<%= r["image"] %>"></a></td>'+
 				'</tr>'+
 				'<% }) %>'+
 				'</tbody>'+
